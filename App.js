@@ -1,6 +1,7 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import {
+  ActivityIndicator,
   Button,
   Image,
   Linking,
@@ -15,8 +16,8 @@ import {
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 
-function DisplayInsects() {
-  const insets = useSafeAreaInsets;
+function DisplayInsets() {
+  const insets = useSafeAreaInsets();
   return (
     <Text>
       Insets: {insets.bottom} - {insets.top}
@@ -28,6 +29,14 @@ export default function App() {
   const onContactMe = () => {
     Linking.openURL("mailto:rafiferdos@gmail.com");
   };
+  const isLoading = true;
+  if (isLoading) {
+    return (
+      <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
 
   return (
     <SafeAreaProvider>
@@ -45,7 +54,7 @@ export default function App() {
               style={{ width: 100, height: 100, borderRadius: 50 }}
               marginTop={-40}
             />
-            <Text style={{ color: "violet", fontSize: 45 }}>Hi there!</Text>
+            <DisplayInsets />
             <View
               style={{
                 flexDirection: "row",
@@ -58,6 +67,7 @@ export default function App() {
               <FontAwesome5 name="x-twitter" size={24} color="blue" />
               <FontAwesome5 name="linkedin" size={24} color="blue" />
             </View>
+            <Text style={{ color: "violet", fontSize: 45 }}>Hi there!</Text>
             <View style={{ height: 20 }} />
             <Button title="Contact Me" onPress={onContactMe} />
 
