@@ -11,6 +11,7 @@ import {
   View,
 } from "react-native";
 import {
+const { useState, useEffect } = require("react");
   SafeAreaProvider,
   SafeAreaView,
   useSafeAreaInsets,
@@ -29,7 +30,12 @@ export default function App() {
   const onContactMe = () => {
     Linking.openURL("mailto:rafiferdos@gmail.com");
   };
-  const isLoading = true;
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setIsLoading(false), 1000);
+    return () => clearTimeout(t);
+  }, []);
   if (isLoading) {
     return (
       <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
